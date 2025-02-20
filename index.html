@@ -1,438 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Advanced Code Editor</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Fira Code', 'Courier New', monospace;
-    }
-
-    body {
-      background-color: #1e1e1e;
-      color: #d4d4d4;
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-    }
-
-    .header {
-      background-color: #252526;
-      padding: 10px;
-      display: flex;
-      border-bottom: 1px solid #333;
-    }
-
-    .tab {
-      background-color: #2d2d2d;
-      padding: 10px 20px;
-      margin-right: 5px;
-      border-radius: 8px 8px 0 0;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      font-size: 14px;
-      transition: background-color 0.3s ease;
-    }
-
-    .tab.active {
-      background-color: #1e1e1e;
-    }
-
-    .tab:hover {
-      background-color: #3a3a3a;
-    }
-
-    .tab-icon {
-      margin-right: 8px;
-      font-size: 16px;
-    }
-
-    .html-icon {
-      color: #e44d26;
-    }
-
-    .css-icon {
-      color: #264de4;
-    }
-    
-    .js-icon {
-      color: #f7df1e;
-    }
-
-    .editor-container {
-      display: flex;
-      flex: 1;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .editor {
-      padding: 0;
-      border: none;
-      outline: none;
-      color: inherit;
-      background-color: #1e1e1e;
-      white-space: pre;
-      overflow: auto;
-      font-size: 14px;
-      width: 100%;
-      height: 100%;
-      position: relative;
-      tab-size: 2;
-    }
-
-    .line-numbers {
-      position: absolute;
-      top: 0;
-      left: 0;
-      padding: 10px 5px 10px 10px;
-      text-align: right;
-      background-color: #1e1e1e;
-      user-select: none;
-      color: #858585;
-      font-size: 14px;
-      line-height: 1.5;
-      min-width: 40px;
-      z-index: 1;
-    }
-
-    .code-area {
-      margin-left: 40px;
-      padding: 10px;
-      min-height: 100%;
-      white-space: pre;
-      overflow: auto;
-      line-height: 1.5;
-    }
-
-    .preview {
-      background-color: white;
-      flex: 1;
-      border-left: 1px solid #333;
-      display: none;
-    }
-
-    .content {
-      display: flex;
-      flex: 1;
-    }
-
-    .tabs-content {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
-
-    .tab-pane {
-      flex: 1;
-      display: none;
-      overflow: hidden;
-    }
-
-    .tab-pane.active {
-      display: flex;
-    }
-
-    .settings-bar {
-      display: flex;
-      background-color: #252526;
-      padding: 10px;
-      border-bottom: 1px solid #333;
-    }
-
-    .settings-button {
-      background: #3a3a3a;
-      border: none;
-      color: #d4d4d4;
-      cursor: pointer;
-      margin-right: 10px;
-      font-size: 14px;
-      padding: 8px 16px;
-      border-radius: 4px;
-      transition: background-color 0.3s ease;
-    }
-
-    .settings-button:hover {
-      background-color: #4a4a4a;
-    }
-
-    /* VS Code style syntax highlighting */
-    .token.comment { color: #6A9955; }
-    .token.string { color: #CE9178; }
-    .token.number { color: #B5CEA8; }
-    .token.keyword { color: #569CD6; }
-    .token.operator { color: #D4D4D4; }
-    .token.tag { color: #569CD6; }
-    .token.attribute { color: #9CDCFE; }
-    .token.function { color: #DCDCAA; }
-    .token.selector { color: #D7BA7D; }
-    .token.property { color: #9CDCFE; }
-    .token.punctuation { color: #D4D4D4; }
-    .token.boolean { color: #569CD6; }
-    .token.class-name { color: #4EC9B0; }
-    .token.constant { color: #4FC1FF; }
-    .token.variable { color: #9CDCFE; }
-    .token.regex { color: #D16969; }
-    .token.important { color: #569CD6; }
-    .token.builtin { color: #4FC1FF; }
-  </style>
-  <!-- Prism.js for syntax highlighting -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-core.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/autoloader/prism-autoloader.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Code Editor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="header">
-    <div class="tab active" onclick="switchTab('html')">
-      <span class="tab-icon html-icon">&#9701;</span> HTML
-    </div>
-    <div class="tab" onclick="switchTab('css')">
-      <span class="tab-icon css-icon">&#9702;</span> CSS
-    </div>
-    <div class="tab" onclick="switchTab('js')">
-      <span class="tab-icon js-icon">JS</span> JavaScript
-    </div>
-  </div>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-code"></i>
+                <span>Modern Editor</span>
+            </div>
+            <div class="actions">
+                <button class="btn" id="save-btn">
+                    <i class="fas fa-save"></i> Save
+                </button>
+                <button class="btn primary" id="share-btn">
+                    <i class="fas fa-share"></i> Share
+                </button>
+            </div>
+        </header>
 
-  <div class="settings-bar">
-    <button class="settings-button" onclick="runCode()">Run &#9654;</button>
-    <button class="settings-button" onclick="togglePreview()">Preview</button>
-    <button class="settings-button" id="auto-run-toggle">Auto-run: Off</button>
-  </div>
-
-  <div class="content">
-    <div class="tabs-content">
-      <div id="html-pane" class="tab-pane active">
-        <div class="editor-container">
-          <div class="line-numbers" id="html-line-numbers"></div>
-          <pre id="html-editor" class="editor code-area" spellcheck="false"><code class="language-html" contenteditable="true"></code></pre>
+        <!-- Editor Section -->
+        <div class="editor-section">
+            <div class="editor-tabs">
+                <div class="tab active" data-tab="html">
+                    <i class="fab fa-html5"></i> HTML
+                    <div class="settings-icon">
+                        <i class="fas fa-cog"></i>
+                        <div class="settings-menu">
+                            <div class="menu-item">Format Code</div>
+                            <div class="menu-item">Settings</div>
+                            <div class="menu-item">Clear</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab" data-tab="css">
+                    <i class="fab fa-css3-alt"></i> CSS
+                    <div class="settings-icon">
+                        <i class="fas fa-cog"></i>
+                        <div class="settings-menu">
+                            <div class="menu-item">Format Code</div>
+                            <div class="menu-item">Settings</div>
+                            <div class="menu-item">Clear</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab" data-tab="js">
+                    <i class="fab fa-js"></i> JavaScript
+                    <div class="settings-icon">
+                        <i class="fas fa-cog"></i>
+                        <div class="settings-menu">
+                            <div class="menu-item">Format Code</div>
+                            <div class="menu-item">Settings</div>
+                            <div class="menu-item">Clear</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="editors-container">
+                <div class="editor active" id="html-editor"></div>
+                <div class="editor" id="css-editor"></div>
+                <div class="editor" id="js-editor"></div>
+            </div>
         </div>
-      </div>
-      <div id="css-pane" class="tab-pane">
-        <div class="editor-container">
-          <div class="line-numbers" id="css-line-numbers"></div>
-          <pre id="css-editor" class="editor code-area" spellcheck="false"><code class="language-css" contenteditable="true"></code></pre>
+
+        <!-- Preview Section -->
+        <div class="preview-section">
+            <div class="preview-header">
+                <span>Output</span>
+                <div class="preview-controls">
+                    <button class="btn" id="refresh-btn">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                    <button class="btn" id="open-preview">
+                        <i class="fas fa-external-link-alt"></i>
+                    </button>
+                </div>
+            </div>
+            <iframe id="preview-frame"></iframe>
         </div>
-      </div>
-      <div id="js-pane" class="tab-pane">
-        <div class="editor-container">
-          <div class="line-numbers" id="js-line-numbers"></div>
-          <pre id="js-editor" class="editor code-area" spellcheck="false"><code class="language-javascript" contenteditable="true"></code></pre>
+
+        <!-- Console Section -->
+        <div class="console-section" id="console-panel">
+            <div class="console-header">
+                <span>Console</span>
+                <button class="btn" id="clear-console">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+            <div id="console-output"></div>
         </div>
-      </div>
     </div>
-    <iframe id="preview" class="preview"></iframe>
-  </div>
 
-  <script>
-    // Initialize editors with sample code
-    const htmlEditor = document.querySelector('#html-editor code');
-    const cssEditor = document.querySelector('#css-editor code');
-    const jsEditor = document.querySelector('#js-editor code');
-    
-    htmlEditor.textContent = `<!DOCTYPE html>
-<html>
-<head>
-  <title>Interactive Button Example</title>
-</head>
-<body>
-  <div class="button-wrap">
-    <button class="button" id="actionButton">Click Me</button>
-  </div>
-</body>
-</html>`;
-
-    cssEditor.textContent = `.button-wrap {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-image: radial-gradient(
-    rgba(255, 255, 255, 0.02) 1px,
-    transparent 3px
-  ),
-  radial-gradient(circle at center, #11161f 0%, #08090b 100%);
-  background-size:
-    7px 7px,
-    100% 100%;
-  background-position:
-    0 0,
-    center center;
-}
-
-.button {
-  --radius: 18px;
-  outline: none;
-  cursor: pointer;
-  font-size: 22px;
-  background: transparent;
-  border: 0;
-  color: white;
-  padding: 12px 25px;
-  border-radius: var(--radius);
-  background: linear-gradient(#3b82f6, #1e40af);
-  box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
-  transition: all 0.2s ease;
-}
-
-.button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 0 30px rgba(59, 130, 246, 0.7);
-}
-
-.button:active {
-  transform: translateY(1px);
-  box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
-}`;
-
-    jsEditor.textContent = `// Wait for the DOM to be fully loaded
-document.addEventListener('DOMContentLoaded', function() {
-  // Get reference to the button
-  const button = document.getElementById('actionButton');
-  
-  // Add click event listener
-  button.addEventListener('click', function() {
-    // Change text when clicked
-    this.textContent = 'Clicked!';
-    
-    // Create a notification element
-    const notification = document.createElement('div');
-    notification.textContent = 'Button was clicked!';
-    notification.style.position = 'fixed';
-    notification.style.top = '20px';
-    notification.style.right = '20px';
-    notification.style.backgroundColor = '#4CAF50';
-    notification.style.color = 'white';
-    notification.style.padding = '10px';
-    notification.style.borderRadius = '5px';
-    notification.style.zIndex = '1000';
-    
-    // Add to document
-    document.body.appendChild(notification);
-    
-    // Remove after 3 seconds
-    setTimeout(function() {
-      notification.remove();
-    }, 3000);
-  });
-});`;
-
-    // Apply syntax highlighting initially
-    Prism.highlightAll();
-
-    function switchTab(tabName) {
-      // Hide all tab panes
-      document.querySelectorAll('.tab-pane').forEach(pane => {
-        pane.classList.remove('active');
-      });
-      
-      // Show selected tab pane
-      document.getElementById(`${tabName}-pane`).classList.add('active');
-      
-      // Update tab styles
-      document.querySelectorAll('.tab').forEach(tab => {
-        tab.classList.remove('active');
-      });
-      event.currentTarget.classList.add('active');
-      
-      updateLineNumbers(tabName);
-    }
-
-    function updateLineNumbers(editorType) {
-      const editor = document.querySelector(`#${editorType}-editor code`);
-      const lineNumbers = document.getElementById(`${editorType}-line-numbers`);
-      
-      const text = editor.textContent;
-      const lines = text.split('\n');
-      let lineNumbersHTML = '';
-      
-      for (let i = 1; i <= lines.length; i++) {
-        lineNumbersHTML += `${i}<br>`;
-      }
-      
-      lineNumbers.innerHTML = lineNumbersHTML;
-    }
-
-    function runCode() {
-      const html = document.querySelector('#html-editor code').textContent;
-      const css = document.querySelector('#css-editor code').textContent;
-      const js = document.querySelector('#js-editor code').textContent;
-      
-      const preview = document.getElementById('preview');
-      preview.style.display = 'block';
-      
-      const previewDoc = preview.contentDocument || preview.contentWindow.document;
-      previewDoc.open();
-      previewDoc.write(`
-        ${html}
-        <style>${css}</style>
-        <script>${js}<\/script>
-      `);
-      previewDoc.close();
-    }
-
-    function togglePreview() {
-      const preview = document.getElementById('preview');
-      if (preview.style.display === 'none' || preview.style.display === '') {
-        preview.style.display = 'block';
-        runCode();
-      } else {
-        preview.style.display = 'none';
-      }
-    }
-
-    // Auto-run toggle
-    let autoRunEnabled = false;
-    document.getElementById('auto-run-toggle').addEventListener('click', function() {
-      autoRunEnabled = !autoRunEnabled;
-      this.textContent = `Auto-run: ${autoRunEnabled ? 'On' : 'Off'}`;
-    });
-
-    // Setup contenteditable with syntax highlighting
-    const editors = [
-      { element: htmlEditor, lang: 'html', lineNumbers: document.getElementById('html-line-numbers') },
-      { element: cssEditor, lang: 'css', lineNumbers: document.getElementById('css-line-numbers') },
-      { element: jsEditor, lang: 'javascript', lineNumbers: document.getElementById('js-line-numbers') }
-    ];
-
-    editors.forEach(editor => {
-      editor.element.addEventListener('input', function() {
-        // Reapply syntax highlighting
-        Prism.highlightElement(this);
-        
-        // Update line numbers
-        const lines = this.textContent.split('\n');
-        let lineNumbersHTML = '';
-        for (let i = 1; i <= lines.length; i++) {
-          lineNumbersHTML += `${i}<br>`;
-        }
-        editor.lineNumbers.innerHTML = lineNumbersHTML;
-        
-        // Auto-run if enabled
-        if (autoRunEnabled) {
-          runCode();
-        }
-      });
-
-      // Handle tab key
-      editor.element.addEventListener('keydown', function(e) {
-        if (e.key === 'Tab') {
-          e.preventDefault();
-          document.execCommand('insertText', false, '  '); // Insert 2 spaces
-        }
-      });
-    });
-
-    // Initialize line numbers
-    updateLineNumbers('html');
-    updateLineNumbers('css');
-    updateLineNumbers('js');
-  </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.36.1/min/vs/loader.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
