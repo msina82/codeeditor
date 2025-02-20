@@ -1,0 +1,225 @@
+:root {
+    --primary-bg: #1e1e1e;
+    --secondary-bg: #252526;
+    --border-color: #333;
+    --primary-text: #fff;
+    --secondary-text: #888;
+    --accent-color: #0098ff;
+    --tab-active: #2d2d2d;
+    --hover-color: #3d3d3d;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--primary-bg);
+    color: var(--primary-text);
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Header Styles */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: var(--secondary-bg);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.2rem;
+}
+
+.logo i {
+    color: var(--accent-color);
+}
+
+.actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.btn {
+    padding: 0.5rem 1rem;
+    background-color: var(--secondary-bg);
+    border: 1px solid var(--border-color);
+    color: var(--primary-text);
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background-color: var(--hover-color);
+}
+
+.btn.primary {
+    background-color: var(--accent-color);
+    border: none;
+}
+
+.btn.primary:hover {
+    background-color: #0088ee;
+}
+
+/* Editor Section Styles */
+.editor-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.editor-tabs {
+    display: flex;
+    background-color: var(--secondary-bg);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.tab {
+    padding: 1rem 2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+}
+
+.tab.active {
+    background-color: var(--tab-active);
+    border-bottom: 2px solid var(--accent-color);
+}
+
+.tab i {
+    font-size: 1.2rem;
+}
+
+.tab[data-tab="html"] i { color: #e34c26; }
+.tab[data-tab="css"] i { color: #264de4; }
+.tab[data-tab="js"] i { color: #f7df1e; }
+
+/* Settings Menu Styles */
+.settings-icon {
+    margin-left: 1rem;
+    position: relative;
+    color: var(--secondary-text);
+}
+
+.settings-icon:hover {
+    color: var(--primary-text);
+}
+
+.settings-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: var(--secondary-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    min-width: 150px;
+    z-index: 1000;
+}
+
+.settings-icon:hover .settings-menu {
+    display: block;
+}
+
+.menu-item {
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.menu-item:hover {
+    background-color: var(--hover-color);
+}
+
+/* Editors Container */
+.editors-container {
+    flex: 1;
+    position: relative;
+}
+
+.editor {
+    display: none;
+    height: 100%;
+}
+
+.editor.active {
+    display: block;
+}
+
+/* Preview Section */
+.preview-section {
+    height: 40vh;
+    border-top: 1px solid var(--border-color);
+}
+
+.preview-header {
+    padding: 0.5rem 1rem;
+    background-color: var(--secondary-bg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.preview-controls {
+    display: flex;
+    gap: 0.5rem;
+}
+
+#preview-frame {
+    width: 100%;
+    height: calc(100% - 40px);
+    border: none;
+    background-color: white;
+}
+
+/* Console Section */
+.console-section {
+    height: 200px;
+    background-color: var(--primary-bg);
+    border-top: 1px solid var(--border-color);
+}
+
+.console-header {
+    padding: 0.5rem 1rem;
+    background-color: var(--secondary-bg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#console-output {
+    padding: 1rem;
+    height: calc(100% - 40px);
+    overflow-y: auto;
+    font-family: monospace;
+    font-size: 0.9rem;
+}
+
+.console-line {
+    margin: 0.25rem 0;
+    color: var(--secondary-text);
+}
+
+.console-error { color: #ff5555; }
+.console-warning { color: #ffb86c; }
